@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "Laboratorio", catalog = "manutencao")
@@ -16,7 +20,9 @@ public class Laboratorio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull @NotEmpty @Size(min = 3 ,max = 150)
 	private String nome;
+	@NotNull @NotEmpty
 	private String endereco;
 	
 	@Enumerated(EnumType.STRING)

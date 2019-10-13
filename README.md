@@ -1,44 +1,61 @@
-#Spring Data JPA com Hibernate usando MySql.
+# Spring Data JPA com Hibernate usando MySql.
 
 Este projeto foi feito para o teste da Dasa.
 
-##DescriÁ„o
+## Descri√ß√£o
 
-Projeto em Maven, para manutenÁ„o de LaboratÛrios e Exames com banco MySql rodando em container em servidor GCP(Google Cloud Plataform). 
+Projeto em Maven, para manuten√ß√£o de Laborat√≥rios e Exames com banco MySql rodando em container em servidor GCP(Google Cloud Plataform). 
 
-Usando os seguintes endpoints, podem se obter as seguintes operaÁıes CRUD:
+Usando os seguintes endpoints, podem se obter as seguintes opera√ß√µes CRUD:
 
-###LaboratÛrio:
+### Laborat√≥rio:
     GET:
-    /rest/lab/ - Retorna lista de todos LaboratÛrios criados no banco MySql Tabela - laboratorio
-    /rest/lab/{name} - Retorna detalhes do LaboratÛrio que foi passado usando o Nome na URL
-    /rest/lab/id/{id} - Retorna detalhes do LaboratÛrio que foi passado usando o ID na URL
+    /rest/laboratorio/ - Retorna lista de todos Laborat√≥ios criados no banco MySql Tabela - laboratorio
+    /rest/laboratorio/{name} - Retorna detalhes do Laborat√≥io que foi passado usando o Nome na URL
+    /rest/laboratorio/id/{id} - Retorna detalhes do Laborat√≥io que foi passado usando o ID na URL
     
     Post:
-    /rest/lab/ - Cria LaboratÛrio com os dados passados no Corpo da API
+    /rest/laboratorio/ - Cria Laborat√≥rio com os dados passados no Corpo da API
     
     Put:
-    /rest/lab/{id} - Realiza Update no Banco MySQL, na tabela laboratÛrio usando como Referencia o ID passado na URL
+    /rest/laboratorio/{id} - Realiza Update no Banco MySQL, na tabela laboratorio usando como Referencia o ID passado na URL
     
     Delete:
-    /rest/lab/{id} - Realiza Delete no Banco MySQL, na tabela laboratÛrio usando como Referencia o ID passado na URL
+    /rest/laboratorio/{id} - Realiza Delete no Banco MySQL, na tabela laboratorio usando como Referencia o ID passado na URL
     
-###Exames:
+### Exames:
 
     GET:
-    /rest/lab/ - Retorna lista de todos Exames criados no banco MySql Tabela - exame
-    /rest/lab/{name} - Retorna detalhes do Exames que foi passado usando o Nome na URL
-    /rest/lab/id/{id} - Retorna detalhes do Exames que foi passado usando o ID na URL
+    /rest/exame/ - Retorna lista de todos Exames criados no banco MySql Tabela - exame
+    /rest/exame/{name} - Retorna detalhes do Exames que foi passado usando o Nome na URL
+    /rest/exame/id/{id} - Retorna detalhes do Exames que foi passado usando o ID na URL
     
     Post:
-    /rest/lab/ - Cria Exames com os dados passados no Corpo da API
+    /rest/exame/ - Cria Exames com os dados passados no Corpo da API
     
     Put:
-    /rest/lab/{id} - Realiza uma AtualizaÁ„o dos dados presentes na tabela exames no Banco MySQL, usando como Referencia o ID passado na URL
+    /rest/exame/{id} - Realiza uma Atualiza√ß√£o dos dados presentes na tabela exames no Banco MySQL, usando como Referencia o ID passado na URL
     
     Delete:
-    /rest/lab/{id} - Deleta um dado no Banco MySQL, na tabela exames usando como Referencia o ID passado na URL
+    /rest/exame/{id} - Deleta um dado no Banco MySQL, na tabela exames usando como Referencia o ID passado na URL
 
+    
+###	Associa√ß√£o:
+
+    GET:
+    /rest/associacao/ - Retorna lista de todos Associa√ß√µes criados no banco MySql Tabela - associacao
+    /rest/associacao/{name} - Retorna detalhes do associacao que foi passado usando o Nome na URL
+    /rest/associacao/id/{id} - Retorna detalhes do associacao que foi passado usando o ID na URL
+    
+    Post:
+    /rest/associacao/ - Cria Associa√ß√µes com os dados passados no Corpo da API
+    
+    Put:
+    /rest/associacao/{id} - Realiza uma Atualiza√ß√£o dos dados presentes na tabela associacao no Banco MySQL, usando como Referencia o ID passado na URL
+    
+    Delete:
+    /rest/associacao/{id} - Deleta um dado no Banco MySQL, na tabela associacao usando como Referencia o ID passado na URL
+    
 Bibliotecas usadas:
 
     Spring Boot

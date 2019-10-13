@@ -26,7 +26,7 @@ import br.com.dasa.teste.model.Laboratorio;
 import br.com.dasa.teste.repository.LaboratorioRepository;
 
 @RestController
-@RequestMapping("/rest/lab")
+@RequestMapping("/rest/laboratorio")
 public class LaboratorioController {
 	
 	//JpaRepository
@@ -77,7 +77,7 @@ public class LaboratorioController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	
+	//Metodo Delete - Deletar Dados no Banco
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Integer id) {
