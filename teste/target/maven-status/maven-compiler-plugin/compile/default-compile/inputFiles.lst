@@ -6,6 +6,7 @@
 /home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/controller/form/LaboratorioForm.java
 /home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/controller/form/AssociacaoForm.java
 /home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/config/validacao/ErroValidacaoHandler.java
+/home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/controller/form/AtualizaAssociacaoForm.java
 /home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/controller/ExameController.java
 /home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/TesteApplication.java
 /home/lhiucas/workspace/testedasa/teste/src/main/java/br/com/dasa/teste/model/Exame.java
