@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +49,7 @@ public class AssociacaoController {
 	
 	@GetMapping("/{nome}")
 	private List<AssociacaoDto> associacaoNome(@PathVariable("nome") final String nome) {
-		List<Associacao> associacao = associacaoRepository.findByLaboratorioNome(nome);
+		List<Associacao> associacao = associacaoRepository.findByLaboratorio(nome);
 		return AssociacaoDto.converter(associacao);
 	}
 	
@@ -83,22 +82,16 @@ public class AssociacaoController {
 			Associacao associacao = form.atualiza(id, associacaoRepository, laboratorioRepository, exameRepository);
 			if(associacao != null)
 				return ResponseEntity.ok(new AssociacaoDto(associacao));
-			remover(id);
 		}
 		
 		return ResponseEntity.notFound().build();
 	}
 	
-	//Metodo Delete - Deletar Dados no Banco
-	@DeleteMapping("/{id}")
-	@Transactional
-	public ResponseEntity<?> remover(@PathVariable Integer id) {
+	
+	public void desassociar(Integer id) {
 		Optional<Associacao> optional = associacaoRepository.findById(id);
 		if(optional.isPresent()) {
 			associacaoRepository.deleteById(id);
-			return ResponseEntity.ok().build();
 		}
-		
-		return ResponseEntity.notFound().build();
 	}
 }

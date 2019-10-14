@@ -12,6 +12,7 @@ br\com\dasa\teste\controller\form\AssociacaoForm.class
 br\com\dasa\teste\controller\dto\AssociacaoDto.class
 br\com\dasa\teste\controller\dto\ExameDto.class
 br\com\dasa\teste\controller\dto\LaboratorioDto.class
+br\com\dasa\teste\controller\form\AtualizaAssociacaoForm.class
 br\com\dasa\teste\repository\AssociacaoRepository.class
 br\com\dasa\teste\controller\form\ExameForm.class
 br\com\dasa\teste\controller\LaboratorioController.class

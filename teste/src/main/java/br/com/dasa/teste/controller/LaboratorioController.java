@@ -23,6 +23,7 @@ import br.com.dasa.teste.controller.dto.LaboratorioDto;
 import br.com.dasa.teste.controller.form.AtualizacaoLaboratorioForm;
 import br.com.dasa.teste.controller.form.LaboratorioForm;
 import br.com.dasa.teste.model.Laboratorio;
+import br.com.dasa.teste.model.Status;
 import br.com.dasa.teste.repository.LaboratorioRepository;
 
 @RestController
@@ -36,7 +37,7 @@ public class LaboratorioController {
 	//Metodo GET - Buscar Dados no Banco
 	@GetMapping("/")
 	public List<LaboratorioDto> tudo(){
-		List<Laboratorio> laboratorios = laboratorioRepository.findAll();
+		List<Laboratorio> laboratorios = laboratorioRepository.findByStatus(Status.Ativo);
 		return LaboratorioDto.converter(laboratorios);
 	}
 	

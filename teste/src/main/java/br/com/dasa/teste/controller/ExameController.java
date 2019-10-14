@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +22,10 @@ import br.com.dasa.teste.controller.dto.ExameDto;
 import br.com.dasa.teste.controller.form.AtualizacaoExameForm;
 import br.com.dasa.teste.controller.form.ExameForm;
 import br.com.dasa.teste.model.Exame;
+import br.com.dasa.teste.model.Status;
+import br.com.dasa.teste.repository.AssociacaoRepository;
 import br.com.dasa.teste.repository.ExameRepository;
+import br.com.dasa.teste.repository.LaboratorioRepository;
 
 @RestController
 @RequestMapping("/rest/exame")
@@ -33,10 +35,16 @@ public class ExameController {
 	@Autowired
 	ExameRepository exameRepository;
 	
+	@Autowired
+	AssociacaoRepository associacaoRepository;
+	
+	@Autowired
+	LaboratorioRepository laboratorioRepository;
+	
 	//Metodo GET - Buscar Dados no Banco
 	@GetMapping("/")
 	public List<ExameDto> tudo(){
-		List<Exame> exames = exameRepository.findAll();
+		List<Exame> exames = exameRepository.findByStatus(Status.Ativo);
 		return ExameDto.converter(exames);
 	}
 	
@@ -51,6 +59,12 @@ public class ExameController {
 		Exame exames = exameRepository.getOne(id);
 		return new ExameDto(exames);
 	}
+	
+	/*
+	@GetMapping("/laboratorios/{nome}")
+	private List<LaboratorioDto> associacaoNome(@PathVariable("nome") final String nome) {
+		return LaboratorioDto.converter(laboratorios);
+	}*/
 	
 	//Metodo Post - Criar Dados no Banco
 	@PostMapping
@@ -73,18 +87,5 @@ public class ExameController {
 		}
 		
 		return ResponseEntity.notFound().build();
-	}
-	
-	//Metodo Delete - Deletar Dados no Banco
-	@DeleteMapping("/{id}")
-	@Transactional
-	public ResponseEntity<?> remover(@PathVariable Integer id) {
-		Optional<Exame> optional = exameRepository.findById(id);
-		if (optional.isPresent()) {
-			exameRepository.deleteById(id);
-			return ResponseEntity.ok().build();
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
+	}	
 }
