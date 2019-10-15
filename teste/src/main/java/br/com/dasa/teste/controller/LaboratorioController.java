@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,54 +28,54 @@ import br.com.dasa.teste.repository.LaboratorioRepository;
 @RestController
 @RequestMapping("/rest/laboratorio")
 public class LaboratorioController {
-	
-	//JpaRepository
+
+	// JpaRepository
 	@Autowired
 	LaboratorioRepository laboratorioRepository;
-	
-	//Metodo GET - Buscar Dados da tabela laboratorio no Banco
+
+	// Metodo GET - Buscar Dados da tabela laboratorio no Banco
 	@GetMapping("/")
-	public List<LaboratorioDto> tudo(){
+	public List<LaboratorioDto> tudo() {
 		List<Laboratorio> laboratorios = laboratorioRepository.findByStatus(Status.Ativo);
 		return LaboratorioDto.converter(laboratorios);
 	}
-	
-	//Metodo GET - Buscar Dados da tabela laboratorio utilizando Nome
+
+	// Metodo GET - Buscar Dados da tabela laboratorio utilizando Nome
 	@GetMapping("/{nome}")
-	public List<LaboratorioDto> laboratorioNome(@PathVariable("nome") final String nome){
+	public List<LaboratorioDto> laboratorioNome(@PathVariable("nome") final String nome) {
 		List<Laboratorio> laboratorios = laboratorioRepository.findByNome(nome);
 		return LaboratorioDto.converter(laboratorios);
 	}
-	
-	//Metodo GET - Buscar Dados da tabela laboratorio utilizando ID
+
+	// Metodo GET - Buscar Dados da tabela laboratorio utilizando ID
 	@GetMapping("/id/{id}")
 	public LaboratorioDto laboratorioId(@PathVariable Integer id) {
 		Laboratorio laboratorio = laboratorioRepository.getOne(id);
 		return new LaboratorioDto(laboratorio);
 	}
-	
-	
-	//Metodo Post - Criar Dados na tabela laboratorio
+
+	// Metodo Post - Criar Dados na tabela laboratorio
 	@PostMapping
-	public ResponseEntity<LaboratorioDto> cadastrar(@RequestBody @Valid LaboratorioForm form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<LaboratorioDto> cadastrar(@RequestBody @Valid LaboratorioForm form,
+			UriComponentsBuilder uriBuilder) {
 		Laboratorio laboratorios = form.converter();
 		laboratorioRepository.save(laboratorios);
-		
+
 		URI uri = uriBuilder.path("/rest/lab/{id}").buildAndExpand(laboratorios.getId()).toUri();
 		return ResponseEntity.created(uri).body(new LaboratorioDto(laboratorios));
 	}
-	
-	
-	//Metodo Put - Atualizar Dados na tabela laboratorio
+
+	// Metodo Put - Atualizar Dados na tabela laboratorio
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<LaboratorioDto> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizacaoLaboratorioForm form) {
+	public ResponseEntity<LaboratorioDto> atualizar(@PathVariable Integer id,
+			@RequestBody @Valid AtualizacaoLaboratorioForm form) {
 		Optional<Laboratorio> optional = laboratorioRepository.findById(id);
 		if (optional.isPresent()) {
 			Laboratorio laboratorio = form.atualizar(id, laboratorioRepository);
 			return ResponseEntity.ok(new LaboratorioDto(laboratorio));
 		}
-		
+
 		return ResponseEntity.notFound().build();
 	}
 }

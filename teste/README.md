@@ -8,6 +8,7 @@ Projeto em Maven, para manutenção de Laboratórios e Exames com banco MySql ro
 
 Usando os seguintes endpoints, podem se obter as seguintes operações CRUD:
 
+	URL: http://34.95.172.172/
 
 ### Laboratório:
     GET:
@@ -51,7 +52,9 @@ Usando os seguintes endpoints, podem se obter as seguintes operações CRUD:
     Put:
     /rest/associacao/{id} - Realiza uma Atualização dos dados presentes na tabela associacao no Banco MySQL, usando como Referencia o ID passado na URL
 
+### Exemplo
 
+	http://34.95.172.172/rest/laboratorio
 
 
 Bibliotecas usadas:
@@ -130,10 +133,16 @@ Antes de rodar o projeto, serão necessário os seguintes ajustes:
 
 	mvn clean install
 	
+
+# Banco de Dados
+
+Criado um banco de dados MySQL com Database chamada Manutencao.
+
 ### Acessos:
 
 	Banco Mysql:
 		34.95.172.172:3306
+		usuário: root
 		senha: Kai9987321A*
+
 		
-	

@@ -8,7 +8,7 @@ import br.com.dasa.teste.model.Laboratorio;
 import br.com.dasa.teste.model.Status;
 
 public interface LaboratorioRepository extends JpaRepository<Laboratorio, Integer> {
-	
+
 	List<Laboratorio> findByNome(String nome);
 
 	List<Laboratorio> findByStatus(Status status);
