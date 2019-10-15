@@ -145,4 +145,12 @@ Criado um banco de dados MySQL com Database chamada Manutencao.
 		usuário: root
 		senha: Kai9987321A*
 
-		
+#Imagem
+
+Uma imagem foi deixada pronta com a ultima versão do código.
+	
+	local:
+		lhiucas/teste-dasa
+	Comando:
+		docker run -d -p8080:8080 --name dasa lhiucas/teste-dasa:0.0.1-SNAPSHOT
+
