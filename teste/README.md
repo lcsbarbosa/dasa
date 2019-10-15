@@ -145,7 +145,7 @@ Criado um banco de dados MySQL com Database chamada Manutencao.
 		usuário: root
 		senha: Kai9987321A*
 
-#Imagem
+# Imagem
 
 Uma imagem foi deixada pronta com a ultima versão do código.
 	
