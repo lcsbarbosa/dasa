@@ -40,26 +40,28 @@ public class AssociacaoController {
 	@Autowired
 	ExameRepository exameRepository;
 	
-	//Metodo GET - Buscar Dados no Banco
+	//Metodo GET - Buscar Dados da tabela associacao no Banco
 	@GetMapping("/")
 	public List<AssociacaoDto> tudo(){
 		List<Associacao> associacao = associacaoRepository.findAll();
 		return AssociacaoDto.converter(associacao);
 	}
 	
+	//Metodo GET - Buscar Dados da tabela associacao utilizando nome
 	@GetMapping("/{nome}")
 	private List<AssociacaoDto> associacaoNome(@PathVariable("nome") final String nome) {
-		List<Associacao> associacao = associacaoRepository.findByLaboratorio(nome);
+		List<Associacao> associacao = associacaoRepository.findByLaboratorioNome(nome);
 		return AssociacaoDto.converter(associacao);
 	}
 	
+	//Metodo GET - Buscar Dados da tabela associacao utilizando ID
 	@GetMapping("/id/{id}")
 	private AssociacaoDto associacaoID(@PathVariable Integer id) {
 		Associacao associacao = associacaoRepository.getOne(id);
 		return new AssociacaoDto(associacao);
 	}
 	
-	//Metodo Post - Criar Dados no Banco
+	//Metodo Post - Criar Dados na tabela associacao
 	@PostMapping
 	@Transactional
 	public ResponseEntity<AssociacaoDto> cadastrar(@RequestBody @Valid AssociacaoForm form, UriComponentsBuilder uriBuilder){
@@ -73,7 +75,7 @@ public class AssociacaoController {
 		return ResponseEntity.created(uri).body(new AssociacaoDto(associacao));
 	}
 	
-	//Metodo Put - Atualizar Dados no Banco
+	//Metodo Put - Atualizar Dados na tabela associacao
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<AssociacaoDto> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizaAssociacaoForm form) {
@@ -87,7 +89,7 @@ public class AssociacaoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	
+	//Desassocia os Exames dos Laboratorios da Tabela Associacao
 	public void desassociar(Integer id) {
 		Optional<Associacao> optional = associacaoRepository.findById(id);
 		if(optional.isPresent()) {

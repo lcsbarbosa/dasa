@@ -34,19 +34,21 @@ public class LaboratorioController {
 	@Autowired
 	LaboratorioRepository laboratorioRepository;
 	
-	//Metodo GET - Buscar Dados no Banco
+	//Metodo GET - Buscar Dados da tabela laboratorio no Banco
 	@GetMapping("/")
 	public List<LaboratorioDto> tudo(){
 		List<Laboratorio> laboratorios = laboratorioRepository.findByStatus(Status.Ativo);
 		return LaboratorioDto.converter(laboratorios);
 	}
 	
+	//Metodo GET - Buscar Dados da tabela laboratorio utilizando Nome
 	@GetMapping("/{nome}")
 	public List<LaboratorioDto> laboratorioNome(@PathVariable("nome") final String nome){
 		List<Laboratorio> laboratorios = laboratorioRepository.findByNome(nome);
 		return LaboratorioDto.converter(laboratorios);
 	}
 	
+	//Metodo GET - Buscar Dados da tabela laboratorio utilizando ID
 	@GetMapping("/id/{id}")
 	public LaboratorioDto laboratorioId(@PathVariable Integer id) {
 		Laboratorio laboratorio = laboratorioRepository.getOne(id);
@@ -54,7 +56,7 @@ public class LaboratorioController {
 	}
 	
 	
-	//Metodo Post - Criar Dados no Banco
+	//Metodo Post - Criar Dados na tabela laboratorio
 	@PostMapping
 	public ResponseEntity<LaboratorioDto> cadastrar(@RequestBody @Valid LaboratorioForm form, UriComponentsBuilder uriBuilder) {
 		Laboratorio laboratorios = form.converter();
@@ -65,7 +67,7 @@ public class LaboratorioController {
 	}
 	
 	
-	//Metodo Put - Atualizar Dados no Banco
+	//Metodo Put - Atualizar Dados na tabela laboratorio
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<LaboratorioDto> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizacaoLaboratorioForm form) {
@@ -73,19 +75,6 @@ public class LaboratorioController {
 		if (optional.isPresent()) {
 			Laboratorio laboratorio = form.atualizar(id, laboratorioRepository);
 			return ResponseEntity.ok(new LaboratorioDto(laboratorio));
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
-	
-	//Metodo Delete - Deletar Dados no Banco
-	@DeleteMapping("/{id}")
-	@Transactional
-	public ResponseEntity<?> remover(@PathVariable Integer id) {
-		Optional<Laboratorio> optional = laboratorioRepository.findById(id);
-		if (optional.isPresent()) {
-			laboratorioRepository.deleteById(id);
-			return ResponseEntity.ok().build();
 		}
 		
 		return ResponseEntity.notFound().build();

@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "Laboratorio", catalog = "manutencao")
+@Table(name = "Laboratorio")
 public class Laboratorio {
 	
 	@Id

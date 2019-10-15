@@ -9,7 +9,7 @@ import br.com.dasa.teste.model.Exame;
 
 public interface AssociacaoRepository extends JpaRepository<Associacao, Integer>{
 	
-	List<Associacao> findByLaboratorio(String nome);
+	List<Associacao> findByLaboratorioNome(String nome);
 	
-	List<Associacao> findByExame(List<Exame> exame);
+	List<Associacao> findByExameNome(List<Exame> exame);
 }
