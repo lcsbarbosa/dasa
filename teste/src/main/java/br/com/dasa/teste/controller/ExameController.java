@@ -55,9 +55,13 @@ public class ExameController {
 	}
 	
 	@GetMapping("/id/{id}")
-	public ExameDto exameId(@PathVariable Integer id) {
-		Exame exames = exameRepository.getOne(id);
-		return new ExameDto(exames);
+	public ResponseEntity<ExameDto> exameId(@PathVariable Integer id) {
+		Optional<Exame> exames = exameRepository.findById(id);
+		if(exames.isPresent()) {
+			return ResponseEntity.ok(new ExameDto(exames.get()));			
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 	/*

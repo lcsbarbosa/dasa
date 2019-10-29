@@ -1,7 +1,0 @@
-br\com\dasa\teste\model\Tipo.class
-br\com\dasa\teste\TesteApplication.class
-br\com\dasa\teste\model\Laboratorio.class
-br\com\dasa\teste\controller\LaboratorioController.class
-br\com\dasa\teste\model\Exame.class
-br\com\dasa\teste\repository\LaboratorioRepository.class
-br\com\dasa\teste\model\Status.class

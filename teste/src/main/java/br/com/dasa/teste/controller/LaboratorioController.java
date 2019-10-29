@@ -49,9 +49,13 @@ public class LaboratorioController {
 
 	// Metodo GET - Buscar Dados da tabela laboratorio utilizando ID
 	@GetMapping("/id/{id}")
-	public LaboratorioDto laboratorioId(@PathVariable Integer id) {
-		Laboratorio laboratorio = laboratorioRepository.getOne(id);
-		return new LaboratorioDto(laboratorio);
+	public ResponseEntity<LaboratorioDto> laboratorioId(@PathVariable Integer id) {
+		Optional<Laboratorio> laboratorio = laboratorioRepository.findById(id);
+		if(laboratorio.isPresent()) {
+			return ResponseEntity.ok(new LaboratorioDto(laboratorio.get()));			
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 
 	// Metodo Post - Criar Dados na tabela laboratorio

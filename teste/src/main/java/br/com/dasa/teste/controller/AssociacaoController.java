@@ -56,9 +56,13 @@ public class AssociacaoController {
 	
 	//Metodo GET - Buscar Dados da tabela associacao utilizando ID
 	@GetMapping("/id/{id}")
-	private AssociacaoDto associacaoID(@PathVariable Integer id) {
-		Associacao associacao = associacaoRepository.getOne(id);
-		return new AssociacaoDto(associacao);
+	private ResponseEntity<AssociacaoDto> associacaoID(@PathVariable Integer id) {
+		Optional<Associacao> associacao = associacaoRepository.findById(id);
+		if(associacao.isPresent()) {
+			return ResponseEntity.ok(new AssociacaoDto(associacao.get()));			
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 	//Metodo Post - Criar Dados na tabela associacao
