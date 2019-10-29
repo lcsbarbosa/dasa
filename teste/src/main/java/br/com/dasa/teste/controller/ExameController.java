@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -32,6 +33,7 @@ import br.com.dasa.teste.repository.ExameRepository;
 import br.com.dasa.teste.repository.LaboratorioRepository;
 
 @RestController
+@Cacheable(value = "listaExame")
 @RequestMapping("/rest/exame")
 public class ExameController {
 	

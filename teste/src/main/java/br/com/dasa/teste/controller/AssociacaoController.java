@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import br.com.dasa.teste.repository.ExameRepository;
 import br.com.dasa.teste.repository.LaboratorioRepository;
 
 @RestController
+@Cacheable(value = "listaAssociacao")
 @RequestMapping("/rest/associacao")
 public class AssociacaoController {
 	

@@ -31,6 +31,7 @@ import br.com.dasa.teste.model.Status;
 import br.com.dasa.teste.repository.LaboratorioRepository;
 
 @RestController
+@Cacheable(value = "listaLaboratorio")
 @RequestMapping("/rest/laboratorio")
 public class LaboratorioController {
 	
