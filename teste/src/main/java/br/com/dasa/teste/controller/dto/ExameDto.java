@@ -1,7 +1,6 @@
 package br.com.dasa.teste.controller.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 import br.com.dasa.teste.model.Exame;
 import br.com.dasa.teste.model.Status;
@@ -35,8 +34,8 @@ public class ExameDto {
 		this.status = exame.getStatus();
 	}
 	
-	public static List<ExameDto> converter(List<Exame> exames) {
-		return exames.stream().map(ExameDto::new).collect(Collectors.toList());
+	public static Page<ExameDto> converter(Page<Exame> exames) {
+		return exames.map(ExameDto::new);
 	}	
 	
 }

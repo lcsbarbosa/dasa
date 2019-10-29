@@ -1,13 +1,16 @@
 package br.com.dasa.teste.controller;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,15 +47,16 @@ public class ExameController {
 	
 	//Metodo GET - Buscar Dados no Banco
 	@GetMapping("/")
-	public List<ExameDto> tudo(){
-		List<Exame> exames = exameRepository.findByStatus(Status.Ativo);
-		return ExameDto.converter(exames);
-	}
-	
-	@GetMapping("/{nome}")
-	public List<ExameDto> exameNome(@PathVariable("nome") final String nome){
-		List<Exame> exames = exameRepository.findByNome(nome);
-		return ExameDto.converter(exames);
+	public Page<ExameDto> tudo(@RequestParam(required = false) String nome,
+			@PageableDefault(sort = "id", direction = Direction.ASC) Pageable paginacao){		
+		
+		if(nome == null) {
+			Page<Exame> exames = exameRepository.findByStatus(Status.Ativo, paginacao);
+			return ExameDto.converter(exames);
+		} else {
+			Page<Exame> exames = exameRepository.findByNome(nome, paginacao);
+			return ExameDto.converter(exames);
+		}
 	}
 	
 	@GetMapping("/id/{id}")
