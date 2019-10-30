@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,6 +80,7 @@ public class ExameController {
 	
 	//Metodo Post - Criar Dados no Banco
 	@PostMapping
+	@CacheEvict(value = "listaExame", allEntries = true)
 	public ResponseEntity<ExameDto> cadastrar(@RequestBody @Valid ExameForm form, UriComponentsBuilder uriBuilder) {
 		Exame exames = form.converter();
 		exameRepository.save(exames);
@@ -90,6 +92,7 @@ public class ExameController {
 	//Metodo Put - Atualizar Dados no Banco
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaExame", allEntries = true)
 	public ResponseEntity<ExameDto> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizacaoExameForm form) {
 		Optional<Exame> optional = exameRepository.findById(id);
 		if (optional.isPresent()) {

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +71,7 @@ public class AssociacaoController {
 	//Metodo Post - Criar Dados na tabela associacao
 	@PostMapping
 	@Transactional
+	@CacheEvict(value = "listaAssociacao", allEntries = true)
 	public ResponseEntity<AssociacaoDto> cadastrar(@RequestBody @Valid AssociacaoForm form, UriComponentsBuilder uriBuilder){
 		Associacao associacao = form.converter(laboratorioRepository, exameRepository);
 		if(associacao == null) {
@@ -84,6 +86,7 @@ public class AssociacaoController {
 	//Metodo Put - Atualizar Dados na tabela associacao
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaAssociacao", allEntries = true)
 	public ResponseEntity<AssociacaoDto> atualizar(@PathVariable Integer id, @RequestBody @Valid AtualizaAssociacaoForm form) {
 		Optional<Associacao> optional = associacaoRepository.findById(id);
 		if(optional.isPresent()) {

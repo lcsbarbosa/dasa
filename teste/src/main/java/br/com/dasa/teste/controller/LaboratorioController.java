@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,6 +68,7 @@ public class LaboratorioController {
 
 	// Metodo Post - Criar Dados na tabela laboratorio
 	@PostMapping
+	@CacheEvict(value = "listaLaboratorio", allEntries = true)
 	public ResponseEntity<LaboratorioDto> cadastrar(@RequestBody @Valid LaboratorioForm form,
 			UriComponentsBuilder uriBuilder) {
 		Laboratorio laboratorios = form.converter();
@@ -79,6 +81,7 @@ public class LaboratorioController {
 	// Metodo Put - Atualizar Dados na tabela laboratorio
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "listaLaboratorio", allEntries = true)
 	public ResponseEntity<LaboratorioDto> atualizar(@PathVariable Integer id,
 			@RequestBody @Valid AtualizacaoLaboratorioForm form) {
 		Optional<Laboratorio> optional = laboratorioRepository.findById(id);
